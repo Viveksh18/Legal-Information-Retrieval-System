@@ -4,8 +4,7 @@ from langgraph.graph import StateGraph, END
 from langchain_community.document_loaders import PyPDFLoader 
 from langchain_huggingface import HuggingFaceEmbeddings 
 from langchain_text_splitters import RecursiveCharacterTextSplitter 
-from langchain_community.vectorstores import Chroma
-
+from langchain_chroma import Chroma
 
 
 # Define paths
@@ -82,7 +81,6 @@ def create_vector(state: IngestState):
     for i in range(0, len(chunks), BATCH_SIZE):
         batch = chunks[i:i + BATCH_SIZE]
         vector_store.add_documents(batch)
-        vector_store.persist()
         print(f"Batch {i // BATCH_SIZE + 1} persisted ({len(batch)} chunks)")
 
     print("All batches added to Chroma.")
@@ -135,4 +133,5 @@ if __name__ == "__main__":
     print("\n--- LANGGRAPH CONDITIONAL INGESTION (Batch Mode) ---")
     result = ingestion_app.invoke({})
     print("\nDone.")
+    print("✅ Ingestion complete")
     print("Vector DB:", result["vector_store"])
