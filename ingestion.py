@@ -133,5 +133,5 @@ if __name__ == "__main__":
     print("\n--- LANGGRAPH CONDITIONAL INGESTION (Batch Mode) ---")
     result = ingestion_app.invoke({})
     print("\nDone.")
-    print("✅ Ingestion complete")
+    print("Ingestion complete")
     print("Vector DB:", result["vector_store"])
